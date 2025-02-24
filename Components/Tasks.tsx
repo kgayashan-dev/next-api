@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN;
+const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN; // initialize DOMAIN 
 
 export default function TaskList() {
   const [tasks, setTasks] = useState<
