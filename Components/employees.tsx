@@ -136,6 +136,7 @@ const EmployeesAndCars = () => {
     }
   };
 
+
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold text-center mb-8 text-blue-900">Employees and Cars Management</h1>
@@ -159,7 +160,7 @@ const EmployeesAndCars = () => {
               <div className="text-center py-4">Loading employees...</div>
             ) : employees.length > 0 ? (
               <div className="max-h-64 overflow-y-auto mb-4  text-sm">
-                <table className="w-full border-collapse">
+                <table className="w-full border-collapse text-sm">
                   <thead className="bg-gray-100">
                     <tr>
                       <th className="p-2 text-left border-b">ID</th>
@@ -237,7 +238,7 @@ const EmployeesAndCars = () => {
               <div className="text-center py-4">Loading cars...</div>
             ) : cars.length > 0 ? (
               <div className="max-h-64 overflow-y-auto mb-4  text-sm">
-                <table className="w-full border-collapse">
+                <table className="w-full border-collapse text-sm">
                   <thead className="bg-gray-100">
                     <tr>
                       <th className="p-2 text-left border-b">ID</th>
