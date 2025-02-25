@@ -46,8 +46,8 @@ export default function Home() {
         </div>
       </div> */}
 
-      <Employees/>
-      {/* <EmployeesAndCars2/> */}
+      {/* <Employees/> */}
+      <EmployeesAndCars2/>
     </main>
   );
 }
