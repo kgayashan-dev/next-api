@@ -54,7 +54,7 @@ const EmployeesAndCars = () => {
       const data: Car[] = await response.json();
       setCars(data);
       setErrorCar(null);
-    } catch (error: any) {
+    } catch (error) {
       setErrorCar(error.message);
     } finally {
       setLoadingCars(false);
@@ -158,7 +158,7 @@ const EmployeesAndCars = () => {
             {loadingEmployees ? (
               <div className="text-center py-4">Loading employees...</div>
             ) : employees.length > 0 ? (
-              <div className="max-h-64 overflow-y-auto mb-4">
+              <div className="max-h-64 overflow-y-auto mb-4  text-sm">
                 <table className="w-full border-collapse">
                   <thead className="bg-gray-100">
                     <tr>
@@ -169,7 +169,7 @@ const EmployeesAndCars = () => {
                   </thead>
                   <tbody>
                     {employees.map((employee) => (
-                      <tr key={employee.id} className="hover:bg-gray-50">
+                      <tr key={employee.id} className="hover:bg-gray-50 text-sm">
                         <td className="p-2 border-b">{employee.id}</td>
                         <td className="p-2 border-b font-medium">{employee.name}</td>
                         <td className="p-2 border-b">{employee.address}</td>
@@ -236,7 +236,7 @@ const EmployeesAndCars = () => {
             {loadingCars ? (
               <div className="text-center py-4">Loading cars...</div>
             ) : cars.length > 0 ? (
-              <div className="max-h-64 overflow-y-auto mb-4">
+              <div className="max-h-64 overflow-y-auto mb-4  text-sm">
                 <table className="w-full border-collapse">
                   <thead className="bg-gray-100">
                     <tr>
