@@ -22,6 +22,10 @@ export default function LoginPage() {
     console.log(res);
     if (res.ok) {
       router.push("/dashboard");
+        // Store token in sessionStorage (client-side)
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('auth-token', username);
+        }
     } else {
       setError("Invalid login credentials");
     }

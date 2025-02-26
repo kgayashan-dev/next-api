@@ -1,48 +1,62 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React from "react";
 
-import EmployeesAndCars from "@/Components/employees";
-
-// type User = {
-//   id: number;
-//   name: string;
-//   email: string;
-//   status: string;
-//   username: string;
-//   password: string;
-//   role: string;
-// };
-
 export default function Home() {
-  // const [users, setUsers] = useState<User[]>([]);
-
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     const res = await fetch(`${DOMAIN}/api/users`, {
-  //       cache: "no-store",
-  //     });
-  //     const data = await res.json();
-  //     setUsers(data);
-  //   };
-  //   fetchUsers();
-  // }, []);
-
+  const router = useRouter();
   return (
-    <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-      {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-6 sm:mb-8 lg:mb-12">
-        User Management
-      </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-7xl mx-auto">
-        <div className="w-full">
-          <UserForm />
-        </div>
-        <div className="w-full">
-          <UserList users={users} />
-        </div>
-      </div> */}
+    <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      {/* Hero Section */}
+      <section className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+          Welcome to the Managementsystem
+        </h1>
+        <p className="text-lg text-gray-600">
+          Manage users, roles, and settings effortlessly.
+        </p>
+        <button
+          onClick={() => router.push("/login")}
+          className="mt-6 px-6 py-3 text-lg bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+        >
+          Get Started
+        </button>
+      </section>
 
-      {/* <Employees/> */}
-      <h1>Home page</h1>
+      {/* Features Section */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <FeatureCard
+          icon="👥"
+          title="User Management"
+          description="Easily manage users, update profiles, and handle permissions."
+        />
+        <FeatureCard
+          icon="⚙️"
+          title="System Settings"
+          description="Configure application settings and preferences with ease."
+        />
+        <FeatureCard
+          icon="🔒"
+          title="Secure Authentication"
+          description="Ensure secure login and session management for users."
+        />
+      </section>
     </main>
   );
 }
+
+// Feature Card Component
+const FeatureCard = ({
+  icon,
+  title,
+  description,
+}: {
+  icon: string;
+  title: string;
+  description: string;
+}) => (
+  <div className="bg-white shadow-md hover:shadow-lg p-6 rounded-lg transition duration-300">
+    <div className="flex justify-center text-4xl">{icon}</div>
+    <h3 className="text-xl font-semibold text-center mt-4">{title}</h3>
+    <p className="text-gray-600 text-center mt-2">{description}</p>
+  </div>
+);
