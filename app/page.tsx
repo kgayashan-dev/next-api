@@ -1,25 +1,20 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import UserList from "@/Components/UserList";
-import UserForm from "@/Components/UserForm";
-import Employees from "@/Components/employees";
+import React from "react";
+
 import EmployeesAndCars from "@/Components/employees";
-import EmployeesAndCars2 from "@/Components/employees2";
 
-const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN;
-
-type User = {
-  id: number;
-  name: string;
-  email: string;
-  status: string;
-  username: string;
-  password: string;
-  role: string;
-};
+// type User = {
+//   id: number;
+//   name: string;
+//   email: string;
+//   status: string;
+//   username: string;
+//   password: string;
+//   role: string;
+// };
 
 export default function Home() {
-  const [users, setUsers] = useState<User[]>([]);
+  // const [users, setUsers] = useState<User[]>([]);
 
   // useEffect(() => {
   //   const fetchUsers = async () => {
@@ -47,7 +42,7 @@ export default function Home() {
       </div> */}
 
       {/* <Employees/> */}
-      <EmployeesAndCars2/>
+      <EmployeesAndCars />
     </main>
   );
 }
