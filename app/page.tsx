@@ -42,7 +42,7 @@ export default function Home() {
       </div> */}
 
       {/* <Employees/> */}
-      <EmployeesAndCars />
+      <h1>Home page</h1>
     </main>
   );
 }
