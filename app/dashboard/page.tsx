@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 
 export default function Dashboard() {
   const router = useRouter();
+  const [sessionStatus, setSessionStatus] = useState(null);
+  const [user, setUser] = useState(null);
 
   const handleLogout = async () => {
     // Log out the user on the server-side
@@ -23,13 +25,17 @@ export default function Dashboard() {
     window.location.replace("/login");
   };
 
-  const [sessionStatus, setSessionStatus] = useState(null);
-
   useEffect(() => {
     const checkSession = async () => {
       const response = await fetch("/api/auth/session");
       const data = await response.json();
-      setSessionStatus(data.message); // active session
+      
+      if (data.message === "Session active") {
+        setSessionStatus(data.message);
+        setUser(data.user); // Set the user data from the session
+      } else {
+        setSessionStatus(data.message);
+      }
     };
 
     checkSession();
@@ -38,10 +44,10 @@ export default function Dashboard() {
   return (
     <div className="font-sans">
       <h1 className="text-3xl font-bold text-gray-800 mb-4">
-        Welcome to the Dashboard {sessionStatus}
+        Welcome to the Dashboard, {user ? user : "Guest"}
       </h1>
       <p className="text-lg text-gray-600 mb-8">
-        You have logged in successfully.
+        {sessionStatus === "Session active" ? "You have logged in successfully." : "Please log in."}
       </p>
 
       <EmployeesAndCars2 />
