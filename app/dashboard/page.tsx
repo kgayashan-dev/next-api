@@ -22,7 +22,7 @@ export default function Dashboard() {
     const checkSession = async () => {
       const response = await fetch("/api/auth/session");
       const data = await response.json();
-      setSessionStatus(data.message);
+      setSessionStatus(data.message);// active session
     };
 
     checkSession();
