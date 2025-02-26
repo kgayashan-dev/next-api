@@ -1,4 +1,6 @@
 "use client";
+// import EmployeesAndCars from "@/Components/employees";
+import EmployeesAndCars2 from "@/Components/employees2";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -40,6 +42,8 @@ export default function Home() {
           description="Ensure secure login and session management for users."
         />
       </section>
+
+      <EmployeesAndCars2 />
     </main>
   );
 }

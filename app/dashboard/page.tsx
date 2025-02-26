@@ -1,6 +1,6 @@
 "use client";
 
-import EmployeesAndCars from "@/Components/employees";
+import EmployeesAndCars2 from "@/Components/employees2";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -8,12 +8,19 @@ export default function Dashboard() {
   const router = useRouter();
 
   const handleLogout = async () => {
+    // Log out the user on the server-side
     await fetch("/api/auth/logout", { method: "GET", credentials: "include" });
-    router.push("/login"); // Redirect to login after logout
-    // Clear sessionStorage on the client-side after the API request
+
+    // Remove sessionStorage (or localStorage) on the client-side after logout
     if (typeof window !== "undefined") {
-      sessionStorage.removeItem("auth-token"); // Remove the token from sessionStorage
+      sessionStorage.removeItem("auth-token"); // Remove token from sessionStorage
     }
+
+    // Redirect to the login page after logout
+    router.push("/login");
+
+    // Use window.location.replace to clear the browser's history and avoid going back
+    window.location.replace("/login");
   };
 
   const [sessionStatus, setSessionStatus] = useState(null);
@@ -22,7 +29,7 @@ export default function Dashboard() {
     const checkSession = async () => {
       const response = await fetch("/api/auth/session");
       const data = await response.json();
-      setSessionStatus(data.message);// active session
+      setSessionStatus(data.message); // active session
     };
 
     checkSession();
@@ -37,7 +44,7 @@ export default function Dashboard() {
         You have logged in successfully.
       </p>
 
-      <EmployeesAndCars />
+      <EmployeesAndCars2 />
       <button
         className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
         onClick={handleLogout}

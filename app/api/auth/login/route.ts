@@ -1,38 +1,18 @@
-// app/api/auth/login/route.js
+// app/api/auth/login/route.ts
+import { NextResponse, NextRequest } from "next/server";
+import { setSession } from "../session/setSession"; // Ensure the path is correct
 
-import { NextResponse } from 'next/server';
+export async function POST(req: NextRequest) {
+  const { username, password } = await req.json();
 
-export async function POST(req) {
-  try {
-    const { username, password } = await req.json();
-    console.log("Received login request:", username, password);
+  // Simulate user authentication (replace with your real authentication logic)
+  if (username === "user" && password === "password") {
+    const sessionData = JSON.stringify({ username }); // Store username in session
+    const res = NextResponse.json({ message: "Logged in successfully" });
 
-    // Simulate user authentication (Replace with DB check)
-    if (username === 'user' && password === 'password') {
-      console.log("Login successful for:", username);
-      const response = NextResponse.json({ message: 'Logged in successfully' });
-
-      // Set session cookie with the auth token
-      response.cookies.set({
-        name: 'auth-token',
-        value: 'your-secure-session-token', // Replace with a real token or session data
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Secure in production
-        path: '/',
-        maxAge: 60 * 60 * 24, // 1 day expiration
-      });
-
-      // Set session data in sessionStorage (on the client side)
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('auth-token', 'your-secure-session-token'); // Store token in sessionStorage
-      }
-
-      return response;
-    }
-
-    return new NextResponse('Invalid credentials', { status: 401 });
-  } catch (error) {
-    console.error("Login error:", error);
-    return new NextResponse('Server error', { status: 500 });
+    setSession(res, sessionData); // Store session data as a cookie
+    return res;
   }
+
+  return new NextResponse("Invalid credentials", { status: 401 });
 }
