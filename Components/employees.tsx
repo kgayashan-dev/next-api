@@ -178,12 +178,9 @@ const EmployeesAndCars = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {employees.map((employee) => (
-                      <tr
-                        key={employee.id}
-                        className="hover:bg-gray-50 text-sm"
-                      >
-                        <td className="p-2 border-b">{employee.id}</td>
+                    {employees.map((employee, index) => (
+                      <tr key={index} className="hover:bg-gray-50 text-sm">
+                        <td className="p-2 border-b">{index}</td>
                         <td className="p-2 border-b font-medium">
                           {employee.name}
                         </td>
@@ -265,9 +262,9 @@ const EmployeesAndCars = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {cars.map((car) => (
-                      <tr key={car.id} className="hover:bg-gray-50">
-                        <td className="p-2 border-b">{car.id}</td>
+                    {cars.map((car, index) => (
+                      <tr key={index} className="hover:bg-gray-50">
+                        <td className="p-2 border-b">{index + 1}</td>
                         <td className="p-2 border-b font-medium">{car.make}</td>
                         <td className="p-2 border-b">{car.model}</td>
                       </tr>
