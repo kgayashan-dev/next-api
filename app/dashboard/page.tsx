@@ -34,10 +34,10 @@ export default function Dashboard() {
       if (data.message === "Session active") {
         setSessionStatus(data.message);
         setUser(data.user); // Set the user data from the session
-        sessionStorage.setItem("auth-role",data.user); // role
-        
+        sessionStorage.setItem("auth-role", data.user); // role
+
         // Set the user data from the session
-        console.log(data,"data");
+        console.log(data, "data");
       } else {
         setSessionStatus(data.message);
       }
@@ -48,9 +48,17 @@ export default function Dashboard() {
 
   return (
     <div className="font-sans">
-      <h1 className="text-3xl font-bold text-gray-800 mb-4">
-        Welcome to the Dashboard, {user ? user : "Guest"}, {sessionStatus}
-      </h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">
+          Welcome to the Dashboard, {user ? user : "Guest"}, {sessionStatus}
+        </h1>
+        <button
+          className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+      </div>
       <p className="text-lg text-gray-600 mb-8">
         {sessionStatus === "Session active"
           ? "You have logged in successfully."
@@ -58,12 +66,6 @@ export default function Dashboard() {
       </p>
 
       <EmployeesAndCars2 />
-      <button
-        className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
     </div>
   );
 }
