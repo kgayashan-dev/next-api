@@ -47,7 +47,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="font-sans">
+    <div className="font-sans p-4">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-800 mb-4">
           Welcome to the Dashboard, {user ? user : "Guest"}, {sessionStatus}
