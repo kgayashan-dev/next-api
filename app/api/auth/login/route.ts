@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     const res = NextResponse.json(userData);
     setSession(res, JSON.stringify(userData)); // pass the  session/ cookies
     console.log(res);
-    console.log(userData);// store 
+    console.log(userData);// store
     return res;
   } catch (error) {
     console.error("Login error:", error);

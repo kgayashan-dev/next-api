@@ -6,6 +6,5 @@ export async function GET() {
 
     response.headers.set('Set-Cookie', 'auth-token=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0');
 
-    
     return response;
 }

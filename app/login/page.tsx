@@ -28,7 +28,9 @@ export default function LoginPage() {
         return;
       }
 
+      const data = await res.json();
       sessionStorage.setItem("auth-token", username); // taking from login input fields
+      sessionStorage.setItem("auth-role", data);
       router.push("/dashboard");
     } catch (error: unknown) {
       setError(
