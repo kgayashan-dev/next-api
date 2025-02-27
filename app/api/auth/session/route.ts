@@ -7,7 +7,8 @@ export async function GET(req: NextRequest) {
 
   if (token) {
     const sessionData = JSON.parse(token.value); // Use .value to access the cookie value
-    return NextResponse.json({ message: "Session active", user: sessionData.username });
+
+    return NextResponse.json({ message: "Session active", user: sessionData.role   });// session
   } else {
     return NextResponse.json({ message: "No active session" }, { status: 401 });
   }

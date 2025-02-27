@@ -11,23 +11,29 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
 
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-      credentials: "include", // Ensures cookies are sent
-    });
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+        credentials: "include",
+      });
 
-    console.log(res);
-    if (res.ok) {
+      // take the value status
+      if (!res.ok) {
+        const errorData = await res.json();
+        setError(errorData.message || "Invalid login credentials");
+        return;
+      }
+
+      sessionStorage.setItem("auth-token", username); // taking from login input fields
       router.push("/dashboard");
-        // Store token in sessionStorage (client-side)
-        if (typeof window !== 'undefined') {
-          sessionStorage.setItem('auth-token', username);
-        }
-    } else {
-      setError("Invalid login credentials");
+    } catch (error: unknown) {
+      setError(
+        error instanceof Error ? error.message : "An unknown error occurred"
+      );
     }
   };
 
