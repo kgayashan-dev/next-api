@@ -1,6 +1,6 @@
 // app/api/auth/logout/route.ts
 import { NextResponse } from 'next/server';
-
+// serverside
 export async function GET() {
     const response = NextResponse.json({ message: "Logged out" });
 

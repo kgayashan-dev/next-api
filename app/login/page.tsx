@@ -29,7 +29,12 @@ export default function LoginPage() {
 
       router.push("/dashboard");
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An unknown error occurred");
+      console.log(
+        error instanceof Error
+          ? error.message
+          : "An unknown error occurred from the server side!"
+      );
+      setError("An unknown error occurred ");
     }
   };
 
