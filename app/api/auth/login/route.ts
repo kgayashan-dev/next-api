@@ -1,3 +1,4 @@
+// login/route
 import { NextResponse, NextRequest } from "next/server";
 import { setSession } from "../session/setSession"; // Ensure the path is correct
 
@@ -16,13 +17,11 @@ export async function POST(req: NextRequest) {
     }
 
     const userData = await response.json(); // taking from backend
-    console.log("User data received:", userData); // Debugging
 
     // Store session data
     const res = NextResponse.json(userData);
-    setSession(res, JSON.stringify(userData)); // pass the  session/ cookies
-    console.log(res);
-    console.log(userData);// store
+    setSession(res, userData); // Pass the userData object directly
+
     return res;
   } catch (error) {
     console.error("Login error:", error);

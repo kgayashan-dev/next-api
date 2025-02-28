@@ -31,12 +31,6 @@ export default function SessionWarningModal({
           >
             Extend Session
           </button>
-          <button
-            onClick={() => setShowWarning(false)}
-            className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors"
-          >
-            Log Out
-          </button>
         </div>
       </div>
     </div>

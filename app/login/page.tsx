@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -18,24 +18,18 @@ export default function LoginPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
-        credentials: "include",
+        credentials: "include", // IMPORTANT: Ensures cookie is set
       });
 
-      // take the value status
       if (!res.ok) {
         const errorData = await res.json();
         setError(errorData.message || "Invalid login credentials");
         return;
       }
 
-      const data = await res.json();
-      sessionStorage.setItem("auth-token", username); // taking from login input fields
-      sessionStorage.setItem("auth-role", data);
       router.push("/dashboard");
     } catch (error: unknown) {
-      setError(
-        error instanceof Error ? error.message : "An unknown error occurred"
-      );
+      setError(error instanceof Error ? error.message : "An unknown error occurred");
     }
   };
 
