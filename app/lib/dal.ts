@@ -16,6 +16,7 @@ export async function verifySession() {
     return null;
   }
  
+  console.log(session)
 
   return session; // Return session if it's valid
 }

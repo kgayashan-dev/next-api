@@ -1,29 +1,31 @@
+// app/dashboard/page.tsx
 "use client";
-
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { logout } from "../login/actions"; // Import the server action
 
 export default function Dashboard() {
   const router = useRouter();
   const [sessionStatus, setSessionStatus] = useState(null);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
 
   const handleLogout = async () => {
-    // Log out the user on the server-side
-    await fetch("/api/auth/logout", { method: "GET", credentials: "include" });
+    try {
+      // Use the server action for logout
+      await logout();
 
-    // Remove sessionStorage (or localStorage) on the client-side after logout
-    if (typeof window !== "undefined") {
-      sessionStorage.removeItem("auth-token"); // Remove token from sessionStorage
-      sessionStorage.removeItem("auth-role"); // Remove token from sessionStorage
+      // Clear client-side storage
+      if (typeof window !== "undefined") {
+        sessionStorage.removeItem("auth-token");
+        sessionStorage.removeItem("auth-role");
+      }
+
+      // Redirect to login
+      router.push("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
     }
-
-    // Redirect to the login page after logout
-    router.push("/login");
-
-    // Use window.location.replace to clear the browser's history and avoid going back
-    window.location.replace("/login");
   };
 
   useEffect(() => {
@@ -46,6 +48,7 @@ export default function Dashboard() {
     checkSession();
   }, []);
 
+  console.log(user);
   return (
     <div className="font-sans p-4">
       <div className="flex justify-between items-center">
@@ -64,8 +67,6 @@ export default function Dashboard() {
           ? "You have logged in successfully."
           : "Please log in."}
       </p>
-
-
     </div>
   );
 }
