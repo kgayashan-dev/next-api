@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 // Updated types to match the actual return type from your login function
 interface LoginState {
   errors?: {
-    username?: string[] | undefined;
-    password?: string[] | undefined;
+    username?: string[];
+    password?: string[];
   };
   success?: boolean;
   redirectTo?: string;
@@ -20,7 +20,14 @@ export function LoginForm() {
   const [state, loginAction] = useActionState<LoginState, FormData>(
     async (state: LoginState, formData: FormData) => {
       // First parameter must be the state (not prevState)
+      const rawFormData = {
+        email: formData.get("email") as string,
+        password: formData.get("password") as string,
+      };
       const result = await login(state, formData);
+
+      console.log(result,"sdsd");
+      console.log(rawFormData,"sdsd3e32");
       if (result?.redirectTo) {
         router.push(result.redirectTo);
       }
@@ -45,10 +52,10 @@ export function LoginForm() {
               Username
             </label>
             <input
-              id="username"
-              name="username"
-              type="text"
-              placeholder="Enter your username"
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
               className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             {state?.errors?.username && (

@@ -15,8 +15,6 @@ type LoginState = {
   redirectTo?: string;
 };
 
-// const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 const testUser = {
   id: "1",
   email: "admin@gmail.com",
@@ -33,7 +31,17 @@ const loginSchema = z.object({
 });
 
 export async function login(prevState: LoginState, formData: FormData) {
-  const result = loginSchema.safeParse(Object.fromEntries(formData));
+  // Extract form data with proper field names
+  const rawFormData = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  };
+
+  console.log("Form data:", rawFormData); // Debug log
+
+  const result = loginSchema.safeParse(rawFormData);
+
+  console.log("Validation result:", result); // Debug log
 
   if (!result.success) {
     return {
@@ -52,22 +60,6 @@ export async function login(prevState: LoginState, formData: FormData) {
         },
       };
     }
-
-    // Uncomment for real API integration:
-    /*
-    const response = await fetch(`${API_URL}/api/users/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-      credentials: "include",
-    });
-
-    if (!response.ok) {
-      return { errors: { email: ["Invalid email or password"] } };
-    }
-
-    const user = await response.json();
-    */
 
     // Using test user for demo
     const user = testUser;

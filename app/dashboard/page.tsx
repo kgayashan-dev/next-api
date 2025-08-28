@@ -1,6 +1,6 @@
 "use client";
 
-import EmployeesAndCars2 from "@/Components/employees2";
+
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -65,7 +65,7 @@ export default function Dashboard() {
           : "Please log in."}
       </p>
 
-      <EmployeesAndCars2 />
+
     </div>
   );
 }
